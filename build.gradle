@@ -1,0 +1,29 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath 'com.google.guava:guava:23.0'
+        classpath 'com.android.tools.build:gradle:3.1.2'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+task startTestServer(dependsOn: "backend:appengineStart")
+task testOnServer(dependsOn: ":app:connectedAndroidTest")
+testOnServer.mustRunAfter "startTestServer"
+task stopTestServer(dependsOn: "backend:appengineStop")
+testOnServer.finalizedBy "stopTestServer"
+task runTestWithServer(dependsOn: [":startTestServer", ":testOnServer", ":stopTestServer"])
+
+allprojects {
+    repositories {
+        jcenter()
+        google()
+    }
+}

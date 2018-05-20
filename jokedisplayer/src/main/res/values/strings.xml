@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">JokeDisplayer</string>
+    <string name="error_no_joke">OOPS! Something went wrong</string>
+</resources>
